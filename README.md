@@ -22,20 +22,31 @@ You speak → Whisper (local) → OpenClaw AI → ElevenLabs → Speakers
 
 ## ✅ Quick Start
 
-### 1. Install Dependencies
+### Manual Mode (Ready Now)
 ```bash
+# 1. Install dependencies
 chmod +x setup_voice_assistant.sh
 ./setup_voice_assistant.sh
-```
 
-### 2. Test Components
-```bash
+# 2. Test components
 python3 test_voice_components.py
+
+# 3. Start voice assistant
+python3 voice_assistant.py
 ```
 
-### 3. Start Voice Assistant
+### Wake Word Mode ("Hey OpenClaw")
 ```bash
-python3 voice_assistant.py
+# 1. Install wake word dependencies
+chmod +x setup_wake_word.sh
+./setup_wake_word.sh
+
+# 2. Set up Porcupine (see WAKE_WORD_SETUP.md)
+# 3. Test wake word detection
+python3 test_wake_word.py
+
+# 4. Start continuous assistant
+python3 porcupine_voice_assistant.py
 ```
 
 ### 4. Use It
@@ -95,18 +106,22 @@ Press Enter to record (or 'quit' to exit):
 
 ### Core Technologies
 - **Speech Recognition**: OpenAI Whisper (local processing)
+- **Wake Word Detection**: Porcupine by Picovoice (custom "Hey OpenClaw" model)
+- **Voice Activity Detection**: WebRTC VAD (smart speech capture)
 - **AI Processing**: OpenClaw Gateway API
 - **Text-to-Speech**: ElevenLabs (high-quality synthesis)
 - **Audio I/O**: PyAudio for microphone and speaker control
-- **Wake Word**: Future Porcupine integration
 
 ### Key Features
 - ✅ **Local Speech Processing** - No cloud dependencies for transcription
+- ✅ **Wake Word Detection** - "Hey OpenClaw" continuous listening (Porcupine)
 - ✅ **OpenClaw Integration** - Full access to all your AI tools and skills
+- ✅ **Voice Activity Detection** - Smart speech capture with automatic timeout
 - ✅ **Conversation Context** - Maintains session state across interactions
 - ✅ **High-Quality Voice** - ElevenLabs professional speech synthesis
 - ✅ **Privacy Focused** - Audio processing stays on your machine
-- ✅ **Configurable** - Adjust models, timeouts, and audio settings
+- ✅ **Dual Modes** - Manual recording or continuous "always listening"
+- ✅ **Configurable** - Adjust sensitivity, timeouts, and audio settings
 
 ## 📋 Requirements
 
@@ -279,10 +294,12 @@ brew reinstall openai-whisper
 | Component | Setup Cost | Monthly Cost |
 |-----------|------------|--------------|
 | Software Development | Free | $0 |
+| Manual Mode | Free | $0 |
 | Whisper (Local) | Free | $0 |
 | ElevenLabs TTS | Free | $5-15 |
 | Porcupine Wake Word | Free trial | $10 |
-| **Total** | **$0** | **$15-25** |
+| **Manual Mode Total** | **$0** | **$5-15** |
+| **Wake Word Mode Total** | **$0** | **$15-25** |
 
 ### Hardware Costs
 | Option | Initial Cost | Description |
@@ -380,10 +397,13 @@ class MultiRoomVoiceAssistant:
 ## 📖 Documentation
 
 ### API Reference
-- `voice_assistant.py` - Main interactive assistant
-- `test_voice_components.py` - Component testing suite
-- `setup_voice_assistant.sh` - Dependency installer
-- `wake_word_implementation.py` - Future enhancement template
+- `voice_assistant.py` - Manual recording mode assistant
+- `porcupine_voice_assistant.py` - Wake word continuous mode assistant  
+- `test_voice_components.py` - Basic component testing suite
+- `test_wake_word.py` - Wake word detection testing
+- `setup_voice_assistant.sh` - Basic dependency installer
+- `setup_wake_word.sh` - Wake word detection setup
+- `WAKE_WORD_SETUP.md` - Complete Porcupine setup guide
 
 ### Configuration Files
 - `~/.openclaw/voice_config.json` - Voice assistant settings
